@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Rekomendasi Film</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .filter-box {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        select,
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #aaa;
+        }
+
+        .film-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .film-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .film-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .film-poster {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .film-info {
+            padding: 12px;
+        }
+
+        .film-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .film-genre {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .film-rating {
+            font-size: 14px;
+            color: #f39c12;
+            margin-bottom: 6px;
+        }
+
+        .film-synopsis {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎬 Rekomendasi Film</h1>
+
+    <div class="filter-box">
+        <select id="genreFilter" onchange="applyFilters()">
+            <option value="All">Semua Genre</option>
+            <option value="Action">Action</option>
+            <option value="Drama">Drama</option>
+            <option value="Animation">Animation</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Musical">Musical</option>
+            <option value="Romance">Romance</option>
+            <option value="Thriller">Thriller</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Cari judul film..." onkeyup="applyFilters()" />
+    </div>
+
+    <div class="film-container" id="filmList"></div>
+
+    <script>
+        const films = [
+            {
+                title: "Parasite",
+                genre: "Drama",
+                rating: 8.6,
+                image: "img/parasite.jpg",
+                link: "parasite.html",
+                synopsis: "Keluarga miskin menyusup ke rumah orang kaya, hingga terbongkar rahasia gelap."
+            },
+            {
+                title: "Inception",
+                genre: "Sci-Fi",
+                rating: 8.8,
+                image: "img/inception.jpg",
+                link: "inception.html",
+                synopsis: "Mimpi di dalam mimpi, misi mencuri ide berubah menjadi perjuangan menyelamatkan diri."
+            },
+            {
+                title: "Coco",
+                genre: "Animation",
+                rating: 8.4,
+                image: "img/coco.jpg",
+                link: "coco.html",
+                synopsis: "Miguel pergi ke dunia arwah untuk menemukan kakek buyutnya yang seorang musisi."
+            },
+            {
+                title: "La La Land",
+                genre: "Musical",
+                rating: 8.0,
+                image: "img/la la land.jpg",
+                link: "lala.html",
+                synopsis: "Dua insan mengejar mimpi masing-masing, tapi harus memilih antara cinta atau karier."
+            },
+            {
+                title: "Joker",
+                genre: "Thriller",
+                rating: 8.5,
+                image: "img/joker.jpg",
+                link: "joker.html",
+                synopsis: "Kisah tragis Arthur Fleck yang berubah menjadi ikon kekacauan di Gotham City."
+            },
+            {
+                title: "Interstellar",
+                genre: "Sci-Fi",
+                rating: 8.6,
+                image: "img/interstellar.jpg",
+                link: "interstellar.html",
+                synopsis: "Misi mencari planet baru demi menyelamatkan umat manusia dari kehancuran Bumi."
+            },
+            {
+                title: "Her",
+                genre: "Romance",
+                rating: 8.0,
+                image: "img/her.jpg",
+                link: "her.html",
+                synopsis: "Seorang pria kesepian jatuh cinta pada sistem operasi AI dengan suara wanita."
+            },
+            {
+                title: "Spirited Away",
+                genre: "Animation",
+                rating: 8.6,
+                image: "img/spiritAway.jpg",
+                link: "spiritedaway.html",
+                synopsis: "Chihiro terjebak di dunia roh dan harus menyelamatkan orang tuanya yang dikutuk."
+            },
+            {
+                title: "Avengers: Endgame",
+                genre: "Action",
+                rating: 8.4,
+                image: "img/Avanger.jpg",
+                link: "endgame.html",
+                synopsis: "Para Avengers bersatu untuk membalikkan jentikan Thanos dan menyelamatkan semesta."
+            },
+            {
+                title: "The Dark Knight",
+                genre: "Action",
+                rating: 9.0,
+                image: "img/batman.jpg",
+                link: "batman.html",
+                synopsis: "Batman menghadapi Joker, kriminal kejam yang menguji batas moral Gotham."
+            }
+        ];
+
+        function showFilms(list) {
+            const container = document.getElementById("filmList");
+            container.innerHTML = "";
+
+            if (list.length === 0) {
+                container.innerHTML = "<p style='text-align:center'>Film tidak ditemukan.</p>";
+                return;
+            }
+
+            list.forEach(film => {
+                const card = document.createElement("div");
+                card.className = "film-card";
+                card.onclick = () => window.location.href = film.link;
+                card.innerHTML = `
+          <img class="film-poster" src="${film.image}" alt="${film.title}">
+          <div class="film-info">
+            <div class="film-title">${film.title}</div>
+            <div class="film-genre">Genre: ${film.genre}</div>
+            <div class="film-rating">⭐ ${film.rating}</div>
+            <div class="film-synopsis">${film.synopsis}</div>
+          </div>
+        `;
+                container.appendChild(card);
+            });
+        }
+
+        function applyFilters() {
+            const genre = document.getElementById("genreFilter").value;
+            const keyword = document.getElementById("searchInput").value.toLowerCase();
+
+            const filtered = films.filter(f =>
+                (genre === "All" || f.genre === genre) &&
+                f.title.toLowerCase().includes(keyword)
+            );
+
+            showFilms(filtered);
+        }
+
+        showFilms(films);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Detail Film - Parasite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f3f6fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px 40px;
+            font-size: 26px;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+            padding: 40px;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            flex: 2;
+            min-width: 300px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .meta {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .badge-genre {
+            background-color: #2ecc71;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-left: 10px;
+        }
+
+        .section {
+            margin-top: 30px;
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+            color: #1e3a8a;
+            font-size: 18px;
+        }
+
+        .poster {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .info-list a {
+            text-decoration: none;
+            background-color: #1e88e5;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 5px;
+            margin-left: 8px;
+            transition: 0.2s ease;
+        }
+
+        .info-list a:hover {
+            background-color: #0d47a1;
+        }
+
+        ul.info-list ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>🎬 InfoFilm</header>
+
+    <div class="container">
+        <!-- KONTEN UTAMA -->
+        <div class="main-content">
+            <div class="title">Parasite (2019) <span class="badge-genre">Drama</span></div>
+            <div class="meta">Sutradara: Bong Joon-ho | Durasi: 2 jam 12 menit</div>
+
+            <div class="section">
+                <h3>Sinopsis</h3>
+                <p>
+                    Keluarga Kim yang hidup dalam kemiskinan perlahan-lahan menyusup ke rumah keluarga Park yang kaya.
+                    Mereka
+                    berpura-pura menjadi pekerja profesional. Namun, di balik kemewahan rumah itu tersembunyi rahasia
+                    kelam yang
+                    akan mengubah hidup mereka semua.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3>Pemeran</h3>
+                <ul>
+                    <li>Song Kang-ho sebagai Kim Ki-taek</li>
+                    <li>Choi Woo-shik sebagai Ki-woo</li>
+                    <li>Park So-dam sebagai Ki-jung</li>
+                    <li>Lee Sun-kyun sebagai Mr. Park</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <img src="img/landscape parasite.jpg" alt="Poster Parasite" class="poster">
+
+            <ul class="info-list">
+                <li><strong>Rating:</strong> ⭐ 8.6 / 10</li>
+                <li><strong>Tanggal Tayang:</strong> 15 Juli 2025</li>
+                <li><strong>Tayang di:</strong>
+                    <ul>
+                        <li>CGV <a href="https://www.cgv.id/" target="_blank">Tiket</a></li>
+                        <li>Cinema XXI <a href="https://mtix.21cineplex.com/" target="_blank">Tiket</a></li>
+                        <li>Cinepolis <a href="https://cinepolis.co.id/" target="_blank">Tiket</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
